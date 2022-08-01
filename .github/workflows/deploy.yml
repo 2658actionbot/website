@@ -1,16 +1,12 @@
-name: CI
+name: npm deploy to pages
 
 on:
   push:
     branches: [ "new2022" ]
-  pull_request:
-    branches: [ "new2022" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js 17.2.0
@@ -19,5 +15,5 @@ jobs:
         node-version: 17.2.0
         cache: 'npm'
     - run: npm i
-    - run: npm run build --if-present
-    - run: npm test --if-present
+    - run: npm run predeploy
+    - run: npm run actions-deploy
