@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write 
+  pull-requests: write
 
 jobs:
   build-deploy:
@@ -35,6 +35,8 @@ jobs:
       - run: npm run test --if-present
       - name: set remote
         env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: git remote set-url origin "https://$GITHUB_TOKEN@github.com/frc-emotion/website.git"
+          TOKEN: ${{ secrets.TOKEN }}
+        run: git remote set-url origin "https://$TOKEN@github.com/frc-emotion/website.git"
+      - run: git config user.email "jason.ballinger06@gmail.com"
+      - run: git config user.name "Jason Ballinger"
       - run: npm run actions-deploy
